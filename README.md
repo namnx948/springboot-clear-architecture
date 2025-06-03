@@ -7,14 +7,14 @@
 
 Project use clean architecture
 
-🏗 1. Cấu trúc thư mục tổng thể
-src/
+🏗 1. Cấu trúc thư mục tổng thể<br>
+src/<br>
 └── com.example.spingbootexample<br>
 ├── domain/             # Chứa logic nghiệp vụ (core)<br>
 │   ├── model/          # Entity, Value Object<br>
 │   ├── repository/     # Interface cho repo (không phụ thuộc JPA/MyBatis)<br>
 │   └── service/        # Business rule (Domain Service)<br>
-│<br>
+│
 ├── application/        # Xử lý use case, gọi domain<br>
 │   ├── usecase/        # Từng hành động nghiệp vụ<br>
 │   └── dto/            # Dữ liệu input/output<br>
