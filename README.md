@@ -23,7 +23,7 @@ DevConnect PRO giúp lập trình viên:
 
 ## 🏗 Kiến trúc tổng thể
 
-![Architecture Diagram](https://your-image-url.com/arch.png)
+![Architecture Diagram](https://github.com/namy-lemontree/springboot-clear-architecture/blob/main/src/main/resources/image_container_project.png)
 
 | Layer | Mô tả |
 |-------|------|
