@@ -27,7 +27,7 @@ src/
 ├── web/                # Controller REST hoặc GraphQL (entry point)<br>
 │   └── controller/     # REST/GraphQL controllers<br>
 │<br>
-└── SpingBootExampleApplication.kt
+└── SpingBootExampleApplication.kt<br>
 <br>
 🔄 2. Dòng chảy phụ thuộc
 Controller
@@ -37,7 +37,7 @@ Application Layer (UseCase)
 Domain Layer (Business Logic, Entity)
 ↓
 Infrastructure (DB, API, Queue, Mail...)
-<br>
+
 ✅ 3. Vai trò các tầng
 
 | Tầng               | Vai trò chính                                                  |
