@@ -1,6 +1,6 @@
 package com.example.spingbootexample.domain.mapper
 
-import com.example.spingbootexample.application.dto.LoginResponse
+import com.example.spingbootexample.application.dto.response.login.LoginResponse
 import com.example.spingbootexample.base.IConverter
 import com.example.spingbootexample.domain.model.login.UserModel
 

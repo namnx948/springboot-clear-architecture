@@ -32,6 +32,6 @@ data class UsersEntity(
     @Column(name = "avatar_url", columnDefinition = "text")
     var avatarUrl: String? = "",
 
-    @Column(name = "crrated_at", nullable = false)
+    @Column(name = "created_at", nullable = false)
     var createdAt: LocalDateTime = LocalDateTime.now()
 )

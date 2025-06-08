@@ -1,29 +1,51 @@
 package com.example.spingbootexample.infrastructure.config
 
+import com.example.spingbootexample.application.dto.response.login.TokenResult
 import io.jsonwebtoken.Jwts
 import io.jsonwebtoken.security.Keys
+import org.springframework.beans.factory.annotation.Value
 import org.springframework.security.core.authority.SimpleGrantedAuthority
 import org.springframework.security.core.userdetails.User
 import org.springframework.security.core.userdetails.UserDetails
 import org.springframework.stereotype.Service
-import java.util.Date
+import java.util.*
 import javax.crypto.SecretKey
+import kotlin.math.exp
 
 @Service
-class JwtService {
+class JwtService(
+    @Value("\${auth.oauth2.jwt.secret}") secretKey: String,
+    @Value("\${auth.oauth2.expiration}") private val accessExpirationMs: Long,
+    @Value("\${auth.oauth2.refresh-expiration}") private val refreshExpirationMs: Long
+) {
     private val secretKey: SecretKey =
-        Keys.hmacShaKeyFor("your-super-secret-key-12345678901234567890123456789012".toByteArray())
-    private val expirationTime = 3600000 // 1 hour
+        Keys.hmacShaKeyFor(secretKey.toByteArray())
 
-    fun generateToken(username: String): String {
+    fun generateToken(username: String, email: String): TokenResult {
         val now = Date()
-        val expiration = Date(now.time + expirationTime)
-        return Jwts.builder()
+        val accessToken = Jwts.builder()
             .setSubject(username)
+            .claim("email", email)
             .setIssuedAt(now)
-            .setExpiration(expiration)
+            .setExpiration(Date(now.time + accessExpirationMs))
             .signWith(secretKey)
             .compact()
+
+        val refreshToken = Jwts.builder()
+            .setSubject(username)
+            .claim("email", email)
+            .claim("type", "refresh_token")
+            .setIssuedAt(now)
+            .setExpiration(Date(now.time + refreshExpirationMs))
+            .signWith(secretKey)
+            .compact()
+
+        return TokenResult(
+            accessToken = accessToken,
+            refreshToken = refreshToken,
+            expiresIn = accessExpirationMs / 1000
+        )
+
     }
 
     fun validateToken(token: String): Boolean {
@@ -46,6 +68,14 @@ class JwtService {
             .parseClaimsJws(token)
             .body
             .subject
+    }
+
+    fun getClaim(token: String, key: String): String {
+        return Jwts.parserBuilder()
+            .setSigningKey(secretKey)
+            .build()
+            .parseClaimsJws(token)
+            .body[key].toString()
     }
 
     fun getUserDetail(token: String): UserDetails {

@@ -1,4 +1,4 @@
-package com.example.spingbootexample.application.dto
+package com.example.spingbootexample.application.dto.response.login
 
 import java.time.LocalDateTime
 

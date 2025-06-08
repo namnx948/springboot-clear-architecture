@@ -10,5 +10,10 @@ abstract class BaseController {
     protected fun <T> success(data: T?, message: String = "success"): ApiResponse<T> =
         ApiResponse.success(data = data)
 
-    protected fun error(code: Int, message: String): ApiResponse<Nothing> = ApiResponse.error(code, message)
+    protected fun <T> error(
+        code: Int,
+        errorCode: String? = "",
+        message: String? = ""
+    ): ApiResponse<T> =
+        ApiResponse.error(code, errorCode = errorCode, message = message ?: "")
 }

@@ -6,13 +6,17 @@ import com.example.spingbootexample.infrastructure.model.db.UsersEntity
 
 class UserEntityToUserModel : IConverter<UsersEntity, UserModel> {
     override fun convert(input: UsersEntity): UserModel {
-        val userModel = UserModel()
-        userModel.username = input.username
-        userModel.email = input.email
-        userModel.fullName = input.fullName
-        userModel.bio = input.bio
-        userModel.avatarUrl = input.avatarUrl
-        userModel.createdAt = input.createdAt
+        val userModel = UserModel(
+            id = input.id,
+            username = input.username,
+            password = input.password,
+            email = input.email,
+            fullName = input.fullName,
+            bio = input.bio,
+            avatarUrl = input.avatarUrl,
+            createdAt = input.createdAt
+        )
+
         return userModel
     }
 }
